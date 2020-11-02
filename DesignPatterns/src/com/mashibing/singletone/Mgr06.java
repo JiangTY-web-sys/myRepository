@@ -1,0 +1,40 @@
+package com.mashibing.singletone;
+
+/**
+ * @description :饿汉式
+ *    试图减小同步代码块提高效率，不能保证同一个实例
+ *    为保证同一个实例，进行双重判断
+ *    完美写法之一
+ * @author：jty
+ * @date: 2020-11-02
+ * @sine: 0.0.1
+ */
+public class Mgr06 {
+    private static Mgr06 INSTANCE;
+
+    private Mgr06() {}
+
+    public static Mgr06 getInstance() {
+        if (INSTANCE == null) {
+            synchronized (Mgr06.class) {
+                if (INSTANCE == null) {
+                    try {
+                        Thread.sleep(1);
+                    }catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    INSTANCE = new Mgr06();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+            new Thread(() ->{
+                System.out.println(Mgr06.getInstance().hashCode());
+            }).start();
+        }
+    }
+}
