@@ -10,7 +10,7 @@ package com.mashibing.singletone;
  * @sine: 0.0.1
  */
 public class Mgr06 {
-    private static Mgr06 INSTANCE;
+    private static volatile Mgr06 INSTANCE;
 
     private Mgr06() {}
 
