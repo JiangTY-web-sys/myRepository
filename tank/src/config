@@ -4,3 +4,6 @@ gameWeight=1080
 gameHeight=720
 tankSpeed=5
 bulletSpeed=5
+#fireStrategy
+goodFs=com.msb.tank.FourDirFireStrategy
+badFs=com.msb.tank.DefaultFireStrategy

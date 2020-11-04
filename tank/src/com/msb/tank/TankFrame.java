@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,12 +17,15 @@ import java.util.List;
  * @sine: 0.0.1
  */
 public class TankFrame extends Frame {
-    static final int GAME_WIDTH = PropertyMgr.get("gameWeight"), GAME_HEIGHT = PropertyMgr.get("gameHeight");
+    public static final int GAME_WIDTH = PropertyMgr.getInt("gameWeight"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
     Tank myTank = new Tank(400,400,Dir.UP, Group.GOOD,this);
-    List<Bullet> bs = new ArrayList<>();
-    List<Tank> ts = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    public List<BaseBullet> bs = new ArrayList<>();
+    public List<BaseTank> ts = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
+
+//    public GameFactory gf = new DefaultFactory();
+    public GameFactory gf = new RectFactory();
 
     public TankFrame(){
         setSize(GAME_WIDTH,GAME_HEIGHT);

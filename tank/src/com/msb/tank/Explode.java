@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
 /**
@@ -8,7 +10,7 @@ import java.awt.*;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Explode {
+public class Explode extends BaseExplode {
     public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
@@ -27,6 +29,7 @@ public class Explode {
         new Thread(()-> new Audio("audio/explode.wav").play()).start();
     }
 
+    @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 

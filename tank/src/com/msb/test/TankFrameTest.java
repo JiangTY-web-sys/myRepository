@@ -1,4 +1,4 @@
-package com.msb.tank.test;
+package com.msb.test;
 
 import org.junit.jupiter.api.Test;
 

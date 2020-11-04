@@ -1,5 +1,8 @@
 package com.msb.tank;
 
+import com.msb.tank.abstractfactory.BaseBullet;
+import com.msb.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 
 /**
@@ -8,8 +11,8 @@ import java.awt.*;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Bullet {
-    private static final int SPEED = PropertyMgr.get("bulletSpeed");
+public class Bullet extends BaseBullet {
+    private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
     public static final int WIDTH = ResourceMgr.btD.getWidth();
     public static final int HEIGHT = ResourceMgr.btD.getHeight();
 
@@ -33,6 +36,8 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        tf.bs.add(this);
     }
 
     public void paint(Graphics g) {
@@ -78,7 +83,8 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank t) {
+    @Override
+    public void collideWith(BaseTank t) {
         if (this.group == t.getGroup()) return;
 
         if (rect.intersects(t.rect)){
@@ -87,7 +93,7 @@ public class Bullet {
 
             int tX = t.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int tY = t.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(new Explode(tX, tY, tf));
+            tf.explodes.add(tf.gf.createExplode(tX, tY, tf));
         }
 
     }

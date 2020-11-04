@@ -20,7 +20,12 @@ public class PropertyMgr {
         }
     }
 
-    public static int get(String key){
+    public static Object get(String key){
+        if (props == null) return 0;
+        return props.get(key);
+    }
+
+    public static int getInt(String key){
         if (props == null) return 0;
         return Integer.parseInt((String)props.get(key));
     }
