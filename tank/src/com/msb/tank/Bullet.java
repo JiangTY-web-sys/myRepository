@@ -1,7 +1,5 @@
 package com.msb.tank;
 
-import com.msb.tank.abstractfactory.BaseBullet;
-import com.msb.tank.abstractfactory.BaseTank;
 
 import java.awt.*;
 
@@ -11,7 +9,7 @@ import java.awt.*;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Bullet extends BaseBullet {
+public class Bullet{
     private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
     public static final int WIDTH = ResourceMgr.btD.getWidth();
     public static final int HEIGHT = ResourceMgr.btD.getHeight();
@@ -83,8 +81,7 @@ public class Bullet extends BaseBullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    @Override
-    public void collideWith(BaseTank t) {
+    public void collideWith(Tank t) {
         if (this.group == t.getGroup()) return;
 
         if (rect.intersects(t.rect)){
@@ -93,7 +90,7 @@ public class Bullet extends BaseBullet {
 
             int tX = t.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int tY = t.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(tf.gf.createExplode(tX, tY, tf));
+            tf.explodes.add(new Explode(tX, tY, tf));
         }
 
     }

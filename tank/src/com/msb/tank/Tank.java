@@ -1,7 +1,5 @@
 package com.msb.tank;
 
-import com.msb.tank.abstractfactory.BaseTank;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -11,13 +9,15 @@ import java.util.Random;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Tank extends BaseTank {
+public class Tank{
     int x, y;
     Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
     public static final int WIDTH = ResourceMgr.tankU.getWidth();
     public static final int HEIGHT = ResourceMgr.tankU.getHeight();
 
+    Group group = Group.BAD;
+    Rectangle rect = new Rectangle();
     private boolean moving = true;
     private boolean living = true;
 
@@ -121,7 +121,7 @@ public class Tank extends BaseTank {
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.tf.gf.createBullet(bX, bY, dir, this.group, this.tf);
+            new Bullet(bX, bY, dir, this.group, this.tf);
 
             if (this.group == Group.GOOD)
                 new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
@@ -163,5 +163,13 @@ public class Tank extends BaseTank {
 
     public void die() {
         this.living = false;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
