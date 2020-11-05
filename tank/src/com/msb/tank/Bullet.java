@@ -1,6 +1,5 @@
 package com.msb.tank;
 
-
 import java.awt.*;
 
 /**
@@ -9,7 +8,7 @@ import java.awt.*;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Bullet{
+public class Bullet {
     private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
     public static final int WIDTH = ResourceMgr.btD.getWidth();
     public static final int HEIGHT = ResourceMgr.btD.getHeight();
@@ -17,29 +16,29 @@ public class Bullet{
     Rectangle rect = new Rectangle();
 
     private Group group = Group.BAD;
-    private TankFrame tf;
+    GameModel gm;
 
     private int x, y;
     private Dir dir;
     private boolean living = true;
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bs.add(this);
+        gm.bs.add(this);
     }
 
     public void paint(Graphics g) {
-        if (!living) tf.bs.remove(this);
+        if (!living) gm.bs.remove(this);
 
         switch (dir) {
             case LEFT:
@@ -90,7 +89,7 @@ public class Bullet{
 
             int tX = t.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int tY = t.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(new Explode(tX, tY, tf));
+            gm.explodes.add(new Explode(tX, tY, gm));
         }
 
     }
