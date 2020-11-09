@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -9,31 +11,31 @@ import java.util.Random;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Tank{
-    int x, y;
-    Dir dir = Dir.DOWN;
+public class Tank extends GameObject{
+    public Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
     public static final int WIDTH = ResourceMgr.tankU.getWidth();
     public static final int HEIGHT = ResourceMgr.tankU.getHeight();
 
-    Group group = Group.BAD;
+    public Group group = Group.BAD;
     Rectangle rect = new Rectangle();
     private boolean moving = true;
     private boolean living = true;
 
     private Random random = new Random();
 
-    TankFrame tf;
+//    TankFrame tf;
+    public GameModel gm;
 
 //    FireStrategy fs = new DefaultFireStrategy();
     FireStrategy fs;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -58,7 +60,7 @@ public class Tank{
     }
 
     public void paint(Graphics g) {
-        if (!living) tf.ts.remove(this);
+        if (!living) gm.remove(this);
         switch (dir) {
             case LEFT:
             g.drawImage(this.group == Group.GOOD? ResourceMgr.tankL : ResourceMgr.enemyL,x,y,null);
@@ -121,7 +123,7 @@ public class Tank{
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bX, bY, dir, this.group, this.tf);
+            new Bullet(bX, bY, dir, this.group, this.gm);
 
             if (this.group == Group.GOOD)
                 new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
@@ -171,5 +173,13 @@ public class Tank{
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void stop() {
+        moving = false;
     }
 }

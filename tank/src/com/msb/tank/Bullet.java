@@ -9,7 +9,7 @@ import java.awt.*;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Bullet{
+public class Bullet extends GameObject{
     private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
     public static final int WIDTH = ResourceMgr.btD.getWidth();
     public static final int HEIGHT = ResourceMgr.btD.getHeight();
@@ -17,29 +17,28 @@ public class Bullet{
     Rectangle rect = new Rectangle();
 
     private Group group = Group.BAD;
-    private TankFrame tf;
-
-    private int x, y;
+//    private TankFrame tf;
+    GameModel gm;
     private Dir dir;
     private boolean living = true;
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bs.add(this);
+        gm.add(this);
     }
 
     public void paint(Graphics g) {
-        if (!living) tf.bs.remove(this);
+        if (!living) gm.remove(this);
 
         switch (dir) {
             case LEFT:
@@ -81,8 +80,8 @@ public class Bullet{
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank t) {
-        if (this.group == t.getGroup()) return;
+    public boolean collideWith(Tank t) {
+        if (this.group == t.getGroup()) return false;
 
         if (rect.intersects(t.rect)){
             t.die();
@@ -90,12 +89,13 @@ public class Bullet{
 
             int tX = t.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int tY = t.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(new Explode(tX, tY, tf));
+            gm.add(new Explode(tX, tY, gm));
+            return true;
         }
-
+        return false;
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 
@@ -105,5 +105,13 @@ public class Bullet{
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public GameModel getGm() {
+        return gm;
     }
 }
