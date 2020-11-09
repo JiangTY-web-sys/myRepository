@@ -6,8 +6,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @description :坦克大战
@@ -16,9 +14,10 @@ import java.util.List;
  * @sine: 0.0.1
  */
 public class TankFrame extends Frame {
-    public static final int GAME_WIDTH = PropertyMgr.getInt("gameWeight"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
+
+    public static final int GAME_WIDTH = PropertyMgr.getInt("gameWeight"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
 //    public GameFactory gf = new DefaultFactory();
 //    public GameFactory gf = new RectFactory();
@@ -56,6 +55,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
+
 //        Color c = g.getColor();
 //        g.setColor(Color.WHITE);
 //        g.drawString("子弹的数量：" + bs.size(), 10, 60);

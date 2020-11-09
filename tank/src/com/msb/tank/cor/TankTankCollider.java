@@ -1,6 +1,5 @@
 package com.msb.tank.cor;
 
-import com.msb.tank.Bullet;
 import com.msb.tank.GameObject;
 import com.msb.tank.Tank;
 
@@ -16,8 +15,9 @@ public class TankTankCollider implements Collider {
         if (o1 instanceof Tank && o2 instanceof Tank){
             Tank t1 = (Tank) o1;
             Tank t2 = (Tank) o2;
-            if (t1.getRect().intersects(t2.getRect())){
-                t1.stop();
+            if (t1.rect.intersects(t2.rect)){
+                t1.back();
+                t2.back();
             }
         }
         return true;

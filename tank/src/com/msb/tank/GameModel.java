@@ -9,11 +9,22 @@ import java.util.List;
 /**
  * @description :
  * @author：jty
- * @date: 2020/11/8
+ * @date: 2020-11-05
  * @sine: 0.0.1
  */
 public class GameModel {
-    Tank myTank = new Tank(400,400,Dir.UP, Group.GOOD,this);
+
+    private static final GameModel INSTANCE = new GameModel();
+
+    static {
+        INSTANCE.init();
+    }
+
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+
+    Tank myTank;
 
 //    public List<Bullet> bs = new ArrayList<>();
 //    public List<Tank> ts = new ArrayList<>();
@@ -30,13 +41,23 @@ public class GameModel {
         objects.remove(go);
     }
 
-    public GameModel() {
+    public GameModel() {}
+
+    private void init() {
+        myTank = new Tank(400,400,Dir.UP, Group.GOOD);
+
         int initTankCount = PropertyMgr.getInt("initTankCount");
 
         //初始化敌方坦克
         for (int i = 0; i <initTankCount ; i++) {
-            add(new Tank(50 + i*150, 100, Dir.DOWN, Group.BAD, this));
+            new Tank(50 + i*150, 100, Dir.DOWN, Group.BAD);
         }
+
+        //增加新物体
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
 
     }
 

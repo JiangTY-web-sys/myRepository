@@ -1,7 +1,6 @@
 package com.msb.tank.cor;
 
 import com.msb.tank.GameObject;
-import com.msb.tank.Tank;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +17,8 @@ public class ColliderChain implements Collider{
     public ColliderChain(){
         add(new BulletTankCollider());
         add(new TankTankCollider());
+        add(new BulletWallCollider());
+        add(new TankWallCollider());
     }
 
     private void add(Collider c) {

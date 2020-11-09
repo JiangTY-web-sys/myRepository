@@ -1,9 +1,6 @@
 package com.msb.tank.cor;
 
-import com.msb.tank.Bullet;
-import com.msb.tank.Explode;
-import com.msb.tank.GameObject;
-import com.msb.tank.Tank;
+import com.msb.tank.*;
 
 /**
  * @description :
@@ -17,7 +14,15 @@ public class BulletTankCollider implements Collider {
         if (o1 instanceof Bullet && o2 instanceof Tank){
             Bullet b = (Bullet) o1;
             Tank t = (Tank) o2;
-            if (b.collideWith(t)) {
+            //TODO copy code from method collideWith
+            if (b.group == t.group) return true;
+
+            if (b.rect.intersects(t.rect)){
+                t.die();
+                b.die();
+                int tX = t.x + Tank.WIDTH/2 - Explode.WIDTH/2;
+                int tY = t.y + Tank.HEIGHT/2 - Explode.HEIGHT/2;
+                new Explode(tX, tY);
                 return false;
             }
         }else if (o1 instanceof Tank && o2 instanceof Bullet){
@@ -27,17 +32,4 @@ public class BulletTankCollider implements Collider {
 
     }
 
-//    public boolean collideWith(Bullet b, Tank t) {
-//        if (b.getGroup() == t.getGroup()) return false;
-//
-//        if (b.getRect().intersects(t.getRect())){
-//            t.die();
-//            b.die();
-//
-//            int tX = t.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-//            int tY = t.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-//            b.getGm().add(new Explode(tX, tY, gm));
-//        }
-//
-//    }
 }
