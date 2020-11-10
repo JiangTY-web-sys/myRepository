@@ -30,7 +30,7 @@ public class ResourceMgr {
             enemyR = ImageUtil.rotateImage(enemyU,90);
             enemyD = ImageUtil.rotateImage(enemyU,180);
 
-            btU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            btU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
             btL = ImageUtil.rotateImage(btU,-90);
             btR = ImageUtil.rotateImage(btU,90);
             btD = ImageUtil.rotateImage(btU,180);
