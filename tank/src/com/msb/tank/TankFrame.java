@@ -15,10 +15,9 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
 
     public static final int GAME_WIDTH = PropertyMgr.getInt("gameWeight"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
-
 
 //    public GameFactory gf = new DefaultFactory();
 //    public GameFactory gf = new RectFactory();
@@ -57,7 +56,6 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g){
         gm.paint(g);
-
     }
 
     class MyKeyListener extends KeyAdapter{
@@ -115,7 +113,6 @@ public class TankFrame extends Frame {
 
         private void setMainTankDir() {
             Tank myTank = gm.getMainTank();
-
             if(!bL && !bU && !bR && !bD)
                 myTank.setMoving(false);
             else
@@ -124,7 +121,6 @@ public class TankFrame extends Frame {
                 if(bU) myTank.setDir(Dir.UP);
                 if(bR) myTank.setDir(Dir.RIGHT);
                 if(bD) myTank.setDir(Dir.DOWN);
-
         }
 
     }

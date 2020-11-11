@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -9,32 +11,29 @@ import java.util.Random;
  * @date: 2020-09-17
  * @sine: 0.0.1
  */
-public class Tank {
-    int x, y;
-    Dir dir = Dir.DOWN;
+public class Tank extends GameObject{
+    public Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
     public static final int WIDTH = ResourceMgr.tankU.getWidth();
     public static final int HEIGHT = ResourceMgr.tankU.getHeight();
 
+    public Group group = Group.BAD;
+    public Rectangle rect = new Rectangle();
     private boolean moving = true;
     private boolean living = true;
 
-    Group group = Group.BAD;
-    Rectangle rect = new Rectangle();
-
     private Random random = new Random();
 
-    GameModel gm;
+    int oldX, oldY;
 
 //    FireStrategy fs = new DefaultFireStrategy();
     FireStrategy fs;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -56,10 +55,11 @@ public class Tank {
                 e.printStackTrace();
             }
         }
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
-        if (!living) gm.ts.remove(this);
+        if (!living) GameModel.getInstance().remove(this);
         switch (dir) {
             case LEFT:
             g.drawImage(this.group == Group.GOOD? ResourceMgr.tankL : ResourceMgr.enemyL,x,y,null);
@@ -78,7 +78,21 @@ public class Tank {
         move();
     }
 
+    @Override
+    public int getWidth() {
+        return WIDTH;
+
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
+
     private void move() {
+        oldX = x;
+        oldY = y;
+
         if (!moving) return;
         switch (dir) {
             case LEFT:
@@ -122,8 +136,13 @@ public class Tank {
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bX, bY, dir, this.group, this.gm);
+            //装饰器运用
+//            GameModel.getInstance().add(
+//                    new RectDecorator(
+//                            new TailDecorator(
+//                                    new Bullet(bX, bY, dir, this.group))));
 
+            new Bullet(bX, bY, dir, this.group);
             if (this.group == Group.GOOD)
                 new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
         }
@@ -133,29 +152,13 @@ public class Tank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void back() {
+        x = oldX;
+        y = oldY;
     }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
-    }
-
-    public Dir getDir() {
-        return dir;
     }
 
     public void setDir(Dir dir) {
@@ -166,11 +169,4 @@ public class Tank {
         this.living = false;
     }
 
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
 }
