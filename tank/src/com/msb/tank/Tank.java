@@ -1,8 +1,13 @@
 package com.msb.tank;
 
+import com.msb.tank.observer.TankFireEvent;
+import com.msb.tank.observer.TankFireHandler;
+import com.msb.tank.observer.TankFireObserver;
 import com.msb.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -145,6 +150,15 @@ public class Tank extends GameObject{
             new Bullet(bX, bY, dir, this.group);
             if (this.group == Group.GOOD)
                 new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        }
+    }
+
+    private List<TankFireObserver> observers = Arrays.asList(new TankFireHandler());
+
+    public void handleFireKey() {
+        TankFireEvent e = new TankFireEvent(this);
+        for (TankFireObserver o : observers) {
+            o.actionOnFire(e);
         }
     }
 
