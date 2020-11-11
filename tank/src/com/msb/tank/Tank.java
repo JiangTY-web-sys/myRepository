@@ -26,6 +26,7 @@ public class Tank extends GameObject{
 
     int oldX, oldY;
 
+//    TankFrame tf;
 //    FireStrategy fs = new DefaultFireStrategy();
     FireStrategy fs;
 
