@@ -26,10 +26,6 @@ public class GameModel {
 
     Tank myTank;
 
-//    public List<Bullet> bs = new ArrayList<>();
-//    public List<Tank> ts = new ArrayList<>();
-//    public List<Explode> explodes = new ArrayList<>();
-
     ColliderChain chain = new ColliderChain();
 
     private List<GameObject> objects = new ArrayList<>();
