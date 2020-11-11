@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3fc42136-11fe-48b3-80d0-9e50c59ee362" name="Default Changelist" comment="设计模式---观察者模式&#10;科学家就餐问题" />
+    <list default="true" id="2a41b0d1-a4d5-466f-8c6e-6c6429f13c3f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tank" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -80,12 +80,12 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v8" />
-      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v7" />
-      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v6" />
-      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v4" />
-      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v3" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mashibing.observer.v4" />
+      <recent name="com.mashibing.observer.v3" />
+      <recent name="src.com.mashibing.factory.abstractfactory" />
+      <recent name="com.mashibing.factorymethod" />
+      <recent name="com.mashibing.strategy" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.mashibing.observer.v9" />
@@ -94,12 +94,12 @@
       <recent name="com.mashibing.strategy" />
       <recent name="com.mashibing.singletone" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.mashibing.observer.v4" />
-      <recent name="com.mashibing.observer.v3" />
-      <recent name="src.com.mashibing.factory.abstractfactory" />
-      <recent name="com.mashibing.factorymethod" />
-      <recent name="com.mashibing.strategy" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v8" />
+      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v7" />
+      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v6" />
+      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v4" />
+      <recent name="F:\xxoospace\DesignPatterns\src\com\mashibing\observer\v3" />
     </key>
   </component>
   <component name="RunDashboard">
