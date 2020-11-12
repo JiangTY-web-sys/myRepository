@@ -11,14 +11,14 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        Button b = new Button();
+        Buttons b = new Buttons();
         b.addActionListener(new MyActionListener());
         b.addActionListener(new MyActionListener2());
         b.buttonPressed();
     }
 }
 
-class Button {
+class Buttons {
 
     private List<ActionListener> actionListeners = new ArrayList<>();
 
